@@ -50,7 +50,7 @@ class Population {
 
   boolean allDotsDead() {
     for (int i = 0; i < dots.length; i++) {
-      if (!dots[i].dead && !dots[i].reachedGoal) {
+      if (!dots[i].dead && !dots[i].reachedGoal) { //if there are still some dots alive, then they are not all dead, so it returns false
         return false;
       }
     }
@@ -69,7 +69,7 @@ class Population {
 
     newDots[0] = dots[bestDot].gimmeBaby();
     newDots[0].isBest = true;
-    for (int i = 1; i< newDots.length; i++) {//was overwriting copied dot
+    for (int i = 1; i< newDots.length; i++) {
       //select parent based on fitness
       Dot parent = selectParent();
 
@@ -92,10 +92,8 @@ class Population {
   //---------------------------------------------------------------------------------------------------
 
 
-
   Dot selectParent() {
-    float rand = random(fitnessSum);
-
+    float rand = random(fitnessSum); //select a random dot to be the parent based on fitness score
 
     float runningSum = 0;
 
@@ -113,7 +111,7 @@ class Population {
 
   //--------------------------------------------------------------------------------
 
-  void mutateDemBabies() {
+  void mutateDemBabies() { //adds a chance to mutate the baby
     for (int i = 1; i< dots.length; i++) {
       dots[i].brain.mutate();
     }
@@ -121,7 +119,7 @@ class Population {
 
   //-----------------------------------------------------------------------------------------------------
 
-  void setBestDot() {
+  void setBestDot() { //determine which dot performed the based, and directly copy and paste it into the next generation
     float max = 0;
     int maxIndex = 0;
     for (int i = 0; i< dots.length; i++) {
